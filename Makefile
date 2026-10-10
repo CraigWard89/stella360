@@ -172,6 +172,15 @@ else ifeq ($(platform), wiiu)
 	FLAGS += -U__INT32_TYPE__ -U __UINT32_TYPE__ -D__INT32_TYPE__=int
    STATIC_LINKING = 1
 
+# Xbox 360 (Libxenon)
+else ifeq ($(platform), xenon)
+   TARGET := $(TARGET_NAME)_libretro_$(platform).a
+   CC = xenon-gcc$(EXE_EXT)
+   CXX = xenon-g++$(EXE_EXT)
+   AR = xenon-ar$(EXE_EXT)
+   FLAGS += -D__LIBXENON__ -DXENON -D__ppc__ -DMSB_FIRST -mcpu=cell -mtune=cell -m32 -fno-pic -mpowerpc64 -mhard-float -maltivec -I$(DEVKITXENON)/usr/include
+   STATIC_LINKING = 1
+
 # Nintendo Switch (libtransistor)
 else ifeq ($(platform), switch)
 	EXT=a
